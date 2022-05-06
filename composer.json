@@ -12,5 +12,8 @@
     },
     "config": {
         "bin-dir": "bin"
+    },
+    "scripts": {
+        "test": "bin/kahlan --reporter=verbose"
     }
 }
