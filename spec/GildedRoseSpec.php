@@ -120,31 +120,35 @@ describe('Gilded Rose', function () {
 
 
         context('Sulfuras Items', function () {
+            /*
+             * an item can never have its Quality increase above 50,
+             * however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
+             */
 
             it ('updates Sulfuras items before the sell date', function () {
-                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 10, 5);
+                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 80, 5);
 
                 $item->tick();
 
-                expect($item->quality)->toBe(10);
+                expect($item->quality)->toBe(80);
                 expect($item->sellIn)->toBe(5);
             });
 
             it ('updates Sulfuras items on the sell date', function () {
-                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 10, 5);
+                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 80, 5);
 
                 $item->tick();
 
-                expect($item->quality)->toBe(10);
+                expect($item->quality)->toBe(80);
                 expect($item->sellIn)->toBe(5);
             });
 
             it ('updates Sulfuras items after the sell date', function () {
-                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 10, -1);
+                $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 80, -1);
 
                 $item->tick();
 
-                expect($item->quality)->toBe(10);
+                expect($item->quality)->toBe(80);
                 expect($item->sellIn)->toBe(-1);
             });
 
