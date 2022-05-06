@@ -19,7 +19,7 @@ describe('GildedRose of',function (){
     });
 
     it('Creates a Sulfuras item when the name is \'Sulfuras, Hand of Ragnaros\'',function (){
-        $item = GildedRose::of('Sulfuras, Hand of Ragnaros',10,10);
+        $item = GildedRose::of('Sulfuras, Hand of Ragnaros',80,10);
         expect($item)->toBeAnInstanceOf(\App\Models\SulfurasItem::class);
     });
 

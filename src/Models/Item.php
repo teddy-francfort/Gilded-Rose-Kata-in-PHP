@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\InvalidItemQuantityException;
+
 class Item implements ItemInterface
 {
     public const LOWER_QUALITY_BY = 1;
@@ -11,6 +13,20 @@ class Item implements ItemInterface
 
     public function __construct(public string $name, public int $quality, public int $sellIn)
     {
+        $this->setQuality($quality);
+    }
+
+    public function setQuality(int $value)
+    {
+        if($value < static::MIN_QUALITY || $value > static::MAX_QUALITY)
+        {
+            throw new InvalidItemQuantityException(
+                "The value must be between " .
+                static::MIN_QUALITY . " and " . static::MAX_QUALITY .
+                ", value given $value"
+            );
+        }
+        $this->quality = $value;
     }
 
     public function tick(): void

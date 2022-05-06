@@ -1,6 +1,8 @@
 <?php
 
+use App\Exceptions\InvalidItemQuantityException;
 use App\GildedRose;
+use App\Models\Item;
 
 /*
  * Your work begins on LINE 249.
@@ -47,6 +49,24 @@ describe('Gilded Rose', function () {
                 expect($item->quality)->toBe(0);
                 expect($item->sellIn)->toBe(4);
             });
+
+            it ('throws an exception if a quality value superior to the max quality is given on construction',
+                function () {
+                    $createItem = function (){
+                        GildedRose::of('normal', Item::MAX_QUALITY + 1, 5);
+                    };
+                    expect($createItem)
+                        ->toThrow(new InvalidItemQuantityException());
+            });
+
+            it ('throws an exception if a quality value inferior to the min quality is given on construction',
+                function () {
+                    $createItem = function (){
+                        GildedRose::of('normal', Item::MIN_QUALITY - 1, 5);
+                    };
+                    expect($createItem)
+                        ->toThrow(new InvalidItemQuantityException());
+                });
 
         });
 
