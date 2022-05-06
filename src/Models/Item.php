@@ -4,17 +4,9 @@ namespace App\Models;
 
 class Item
 {
-    public $name;
 
-    public $quality;
-
-    public $sellIn;
-
-    public function __construct($name, $quality, $sellIn)
+    public function __construct(public string $name, public int $quality, public int $sellIn)
     {
-        $this->name = $name;
-        $this->quality = $quality;
-        $this->sellIn = $sellIn;
     }
 
     public function tick() : void
