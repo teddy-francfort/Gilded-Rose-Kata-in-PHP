@@ -12,4 +12,9 @@ describe('GildedRose of',function (){
         $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert',10,10);
         expect($item)->toBeAnInstanceOf(\App\Models\BackstageItem::class);
     });
+
+    it('Create a Brie item when the name is \'Aged Brie\'',function (){
+        $item = GildedRose::of('Aged Brie',10,10);
+        expect($item)->toBeAnInstanceOf(\App\Models\BrieItem::class);
+    });
 });
