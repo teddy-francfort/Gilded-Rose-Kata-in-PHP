@@ -22,4 +22,9 @@ describe('GildedRose of',function (){
         $item = GildedRose::of('Sulfuras, Hand of Ragnaros',10,10);
         expect($item)->toBeAnInstanceOf(\App\Models\SulfurasItem::class);
     });
+
+    it('Creates a Conjured item when the name is \'Conjured Mana Cake\'',function (){
+        $item = GildedRose::of('Conjured Mana Cake',10,10);
+        expect($item)->toBeAnInstanceOf(\App\Models\ConjuredItem::class);
+    });
 });
