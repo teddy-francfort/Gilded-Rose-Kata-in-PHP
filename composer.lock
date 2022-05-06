@@ -4,37 +4,40 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4ce5c1927ad45071121cab40e7a3394",
+    "content-hash": "00ef36cd20cdc5d9012b883d5b4de085",
     "packages": [],
     "packages-dev": [
         {
             "name": "kahlan/kahlan",
-            "version": "1.3.2",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "dca19fad8523b9bf9a5e54874f5e169d4a0d0b6f"
+                "reference": "ff2449502f2ae9ee48d3555ce5d285505ab6375b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/dca19fad8523b9bf9a5e54874f5e169d4a0d0b6f",
-                "reference": "dca19fad8523b9bf9a5e54874f5e169d4a0d0b6f",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/ff2449502f2ae9ee48d3555ce5d285505ab6375b",
+                "reference": "ff2449502f2ae9ee48d3555ce5d285505ab6375b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.4"
             },
             "bin": [
                 "bin/kahlan"
             ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "kahlan\\": "src/"
-                },
                 "files": [
-                    "src/init.php"
-                ]
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Kahlan\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -45,7 +48,7 @@
                     "name": "CrysaLEAD"
                 }
             ],
-            "description": "Behavior-Driven Development (BDD) library.",
+            "description": "The PHP Test Framework for Freedom, Truth and Justice.",
             "keywords": [
                 "BDD",
                 "Behavior-Driven Development",
@@ -56,7 +59,11 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2016-05-01T23:20:41+00:00"
+            "support": {
+                "issues": "https://github.com/kahlan/kahlan/issues",
+                "source": "https://github.com/kahlan/kahlan/tree/5.2.0"
+            },
+            "time": "2022-01-16T15:26:38+00:00"
         }
     ],
     "aliases": [],
@@ -65,5 +72,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

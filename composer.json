@@ -1,6 +1,6 @@
 {
     "require-dev": {
-        "kahlan/kahlan": "^1.2"
+        "kahlan/kahlan": "^5.2"
     },
     "autoload": {
         "psr-4": {
