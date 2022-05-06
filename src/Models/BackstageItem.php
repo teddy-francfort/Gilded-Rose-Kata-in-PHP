@@ -9,16 +9,16 @@ class BackstageItem extends Item
     {
 
         if ($this->quality < static::MAX_QUALITY) {
-            $this->quality = $this->quality + 1;
+            $this->increaseQuality();
 
             if ($this->sellIn < 11) {
                 if ($this->quality < static::MAX_QUALITY) {
-                    $this->quality = $this->quality + 1;
+                    $this->increaseQuality();
                 }
             }
             if ($this->sellIn < 6) {
                 if ($this->quality < static::MAX_QUALITY) {
-                    $this->quality = $this->quality + 1;
+                    $this->increaseQuality();
                 }
             }
         }

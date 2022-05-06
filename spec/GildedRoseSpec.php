@@ -305,6 +305,15 @@ describe('Gilded Rose', function () {
                  expect($item->sellIn)->toBe(-11);
              });
 
+             it ('has a quality that is never negative even with starting with an odd number', function () {
+                 $item = GildedRose::of('Conjured Mana Cake', 1, -10);
+
+                 $item->tick();
+
+                 expect($item->quality)->toBe(0);
+                 expect($item->sellIn)->toBe(-11);
+             });
+
          });
 
     });
