@@ -6,6 +6,7 @@ use App\Actions\TickBackstageItemAction;
 use App\Actions\TickBrieItemAction;
 use App\Actions\TickConjuredItemAction;
 use App\Actions\TickItemAction;
+use App\Enums\CategoryEnum;
 use App\Exceptions\InvalidItemQuantityException;
 
 class Item implements ItemInterface
@@ -14,6 +15,7 @@ class Item implements ItemInterface
         public string $name,
         public int $quality,
         public int $sellIn,
+        protected Category $category = new Category(),
         public int $min_quality = 0,
         public int $max_quality = 50,
         public int $lower_quality_by = 1,
@@ -40,11 +42,11 @@ class Item implements ItemInterface
 
     public function tick(): void
     {
-         match ($this->name) {
-             'Aged Brie' => TickBrieItemAction::handle($this),
-             'Sulfuras, Hand of Ragnaros' => null,
-             'Backstage passes to a TAFKAL80ETC concert' => TickBackstageItemAction::handle($this),
-             'Conjured Mana Cake' => TickConjuredItemAction::handle($this),
+         match ($this->category->getName()) {
+             CategoryEnum::AGED_BRIE->value => TickBrieItemAction::handle($this),
+             CategoryEnum::SULFURAS->value => null,
+             CategoryEnum::BACKSTAGE->value => TickBackstageItemAction::handle($this),
+             CategoryEnum::CONJURED->value => TickConjuredItemAction::handle($this),
              default => TickItemAction::handle($this),
         };
     }
