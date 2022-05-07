@@ -16,7 +16,7 @@ class Item implements ItemInterface
         $this->setQuality($quality);
     }
 
-    public function setQuality(int $value)
+    public function setQuality(int $value) : int
     {
         if($value < static::MIN_QUALITY || $value > static::MAX_QUALITY)
         {
@@ -27,6 +27,7 @@ class Item implements ItemInterface
             );
         }
         $this->quality = $value;
+        return $this->quality;
     }
 
     public function tick(): void
