@@ -46,27 +46,27 @@ class Item implements ItemInterface
     /**
      * @return void
      */
-    protected function decreaseQuality(): void
+    public function decreaseQuality(): int
     {
         $quality = $this->quality - static::LOWER_QUALITY_BY;
         if($quality < 0)
         {
             $quality = 0;
         }
-        $this->setQuality($quality);
+        return $this->setQuality($quality);
     }
 
     /**
      * @return void
      */
-    protected function increaseQuality(): void
+    public function increaseQuality(): int
     {
         $quality = $this->quality + static::INCREASE_QUALITY_BY;
         if($quality > static::MAX_QUALITY)
         {
             $quality = static::MAX_QUALITY;
         }
-        $this->setQuality($quality);
+        return $this->setQuality($quality);
     }
 
 }
