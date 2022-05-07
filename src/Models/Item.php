@@ -2,27 +2,35 @@
 
 namespace App\Models;
 
+use App\Actions\TickBackstageItemAction;
+use App\Actions\TickBrieItemAction;
+use App\Actions\TickConjuredItemAction;
+use App\Actions\TickItemAction;
 use App\Exceptions\InvalidItemQuantityException;
 
 class Item implements ItemInterface
 {
-    public const LOWER_QUALITY_BY = 1;
-    public const INCREASE_QUALITY_BY = 1;
-    public const MAX_QUALITY = 50;
-    public const MIN_QUALITY = 0;
+    public function __construct(
+        public string $name,
+        public int $quality,
+        public int $sellIn,
+        public int $min_quality = 0,
+        public int $max_quality = 50,
+        public int $lower_quality_by = 1,
+        public int $increase_quality_by = 1,
 
-    public function __construct(public string $name, public int $quality, public int $sellIn)
+    )
     {
         $this->setQuality($quality);
     }
 
     public function setQuality(int $value) : int
     {
-        if($value < static::MIN_QUALITY || $value > static::MAX_QUALITY)
+        if($value < $this->min_quality || $value > $this->max_quality)
         {
             throw new InvalidItemQuantityException(
                 "The value must be between " .
-                static::MIN_QUALITY . " and " . static::MAX_QUALITY .
+                $this->min_quality . " and " . $this->max_quality .
                 ", value given $value"
             );
         }
@@ -32,41 +40,12 @@ class Item implements ItemInterface
 
     public function tick(): void
     {
-        if ($this->quality > static::MIN_QUALITY) {
-            $this->decreaseQuality();
-        }
-
-        $this->sellIn = $this->sellIn - 1;
-
-        if ($this->sellIn < 0 && $this->quality > static::MIN_QUALITY) {
-            $this->decreaseQuality();
-        }
+         match ($this->name) {
+             'Aged Brie' => TickBrieItemAction::handle($this),
+             'Sulfuras, Hand of Ragnaros' => null,
+             'Backstage passes to a TAFKAL80ETC concert' => TickBackstageItemAction::handle($this),
+             'Conjured Mana Cake' => TickConjuredItemAction::handle($this),
+             default => TickItemAction::handle($this),
+        };
     }
-
-    /**
-     * @return void
-     */
-    public function decreaseQuality(): int
-    {
-        $quality = $this->quality - static::LOWER_QUALITY_BY;
-        if($quality < 0)
-        {
-            $quality = 0;
-        }
-        return $this->setQuality($quality);
-    }
-
-    /**
-     * @return void
-     */
-    public function increaseQuality(): int
-    {
-        $quality = $this->quality + static::INCREASE_QUALITY_BY;
-        if($quality > static::MAX_QUALITY)
-        {
-            $quality = static::MAX_QUALITY;
-        }
-        return $this->setQuality($quality);
-    }
-
 }

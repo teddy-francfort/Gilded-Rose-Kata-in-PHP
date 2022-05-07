@@ -53,7 +53,7 @@ describe('Gilded Rose', function () {
             it ('throws an exception if a quality value superior to the max quality is given on construction',
                 function () {
                     $createItem = function (){
-                        GildedRose::of('normal', Item::MAX_QUALITY + 1, 5);
+                        GildedRose::of('normal', 51, 5);
                     };
                     expect($createItem)
                         ->toThrow(new InvalidItemQuantityException());
@@ -62,7 +62,7 @@ describe('Gilded Rose', function () {
             it ('throws an exception if a quality value inferior to the min quality is given on construction',
                 function () {
                     $createItem = function (){
-                        GildedRose::of('normal', Item::MIN_QUALITY - 1, 5);
+                        GildedRose::of('normal', -1, 5);
                     };
                     expect($createItem)
                         ->toThrow(new InvalidItemQuantityException());
