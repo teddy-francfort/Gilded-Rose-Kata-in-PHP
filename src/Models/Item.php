@@ -47,11 +47,12 @@ class Item implements ItemInterface
      */
     protected function decreaseQuality(): void
     {
-        $this->quality = $this->quality - static::LOWER_QUALITY_BY;
-        if($this->quality < 0)
+        $quality = $this->quality - static::LOWER_QUALITY_BY;
+        if($quality < 0)
         {
-            $this->quality = 0;
+            $quality = 0;
         }
+        $this->setQuality($quality);
     }
 
     /**
@@ -59,11 +60,12 @@ class Item implements ItemInterface
      */
     protected function increaseQuality(): void
     {
-        $this->quality = $this->quality + static::INCREASE_QUALITY_BY;
-        if($this->quality > static::MAX_QUALITY)
+        $quality = $this->quality + static::INCREASE_QUALITY_BY;
+        if($quality > static::MAX_QUALITY)
         {
-            $this->quality = static::MAX_QUALITY;
+            $quality = static::MAX_QUALITY;
         }
+        $this->setQuality($quality);
     }
 
 }
